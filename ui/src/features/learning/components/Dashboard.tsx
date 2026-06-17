@@ -130,7 +130,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <h3 className={styles.sectionHeading}>My active pathways</h3>
                     <div className={styles.pathwayCard}>
                         <div className={styles.pathwayLeft}>
-                            <BookOpenIcon size={24} style={{ color: 'var(--google-blue)' }} />
+                            <BookOpenIcon size={24} style={{ color: 'var(--tech-blue)' }} />
                             <div>
                                 <h4 className={styles.pathwayTitle}>React & Spring Boot Fullstack Development</h4>
                                 <span className={styles.pathwayMeta}>Syllabus Chapters: 4 Modules, 8 Lessons</span>
@@ -161,7 +161,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     {hasCertificate ? (
                         <div className={styles.certificateShowcaseCard}>
                             <div className={styles.certShowcaseLeft}>
-                                <AwardIcon size={36} style={{ color: 'var(--google-yellow)' }} />
+                                <AwardIcon size={36} style={{ color: 'var(--tech-yellow)' }} />
                                 <div>
                                     <h4 className={styles.certShowcaseTitle}>Certified Fullstack Integration Developer</h4>
                                     <p className={styles.certShowcaseMeta}>Issued to <strong>{profile?.fullName || fullName}</strong> upon course evaluation.</p>

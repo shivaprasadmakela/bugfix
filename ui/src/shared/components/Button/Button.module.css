@@ -14,7 +14,7 @@
 }
 
 .button:focus-visible {
-    box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--google-blue);
+    box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--tech-blue);
 }
 
 .button:disabled {
@@ -24,13 +24,15 @@
 
 /* Variants */
 .primary {
-    background-color: var(--google-blue);
+    background: linear-gradient(135deg, #0ea5e9, #6366f1);
     color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.15);
 }
 
 .primary:hover:not(:disabled) {
-    background-color: var(--google-blue-hover);
-    box-shadow: var(--shadow-sm);
+    background: linear-gradient(135deg, #0284c7, #4f46e5);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
 }
 
 .primary:active:not(:disabled) {
@@ -39,13 +41,13 @@
 
 .secondary {
     background-color: transparent;
-    color: var(--google-blue);
+    color: var(--tech-blue);
     border-color: var(--border-color);
 }
 
 .secondary:hover:not(:disabled) {
     background-color: var(--accent-blue-light);
-    border-color: var(--google-blue);
+    border-color: var(--tech-blue);
 }
 
 .secondary:active:not(:disabled) {
@@ -53,12 +55,12 @@
 }
 
 .danger {
-    background-color: var(--google-red);
+    background-color: var(--tech-red);
     color: #ffffff;
 }
 
 .danger:hover:not(:disabled) {
-    background-color: #d93025;
+    background-color: #e11d48;
 }
 
 .danger:active:not(:disabled) {

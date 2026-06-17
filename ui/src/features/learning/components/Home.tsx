@@ -2,24 +2,15 @@ import { useState } from 'react';
 import type { Course, UserProgress, UserProfile } from '../types';
 import { Button } from '../../../shared/components/Button/Button';
 import { 
-    MenuIcon, 
     SearchIcon, 
     HelpIcon, 
     GlobeIcon, 
-    HomeIcon, 
-    CatalogIcon, 
-    PathsIcon, 
-    CollectionsIcon, 
-    SubscriptionsIcon, 
-    OrganizationsIcon,
     RightArrowIcon,
     ChevronRightIcon,
     SunIcon,
     MoonIcon,
     BookOpenIcon,
     AwardIcon,
-    UserIcon,
-    ToggleSidebarIcon,
     LockIcon
 } from '../../../shared/components/Icons';
 import styles from './Home.module.css';
@@ -45,7 +36,6 @@ export const Home: React.FC<HomeProps> = ({
     onResetProgress: _onResetProgress,
     onChangeView
 }) => {
-    const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [activeTab, setActiveTab] = useState<string>('Featured');
     const [activeCredIndex, setActiveCredIndex] = useState<number>(0);
@@ -76,65 +66,12 @@ export const Home: React.FC<HomeProps> = ({
     });
 
     return (
-        <div className={`${styles.container} ${theme === 'dark' ? 'dark-theme' : ''}`}>
-            {/* 1. Sidebar Navigation */}
-            <aside className={`${styles.sidebar} ${sidebarCollapsed ? styles.sidebarCollapsed : ''}`}>
-                <button 
-                    className={styles.toggleSidebarBtn}
-                    onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                    title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-                >
-                    <ToggleSidebarIcon size={22} />
-                </button>
-
-                <div className={`${styles.navItem} ${styles.navItemActive}`}>
-                    <HomeIcon size={20} />
-                    <span className={styles.navLabel}>Home</span>
-                </div>
-                <div className={styles.navItem} onClick={() => onChangeView('DASHBOARD')}>
-                    <UserIcon size={20} />
-                    <span className={styles.navLabel}>Dashboard</span>
-                </div>
-                <div className={styles.navItem} onClick={() => setActiveTab('Featured')}>
-                    <CatalogIcon size={20} />
-                    <span className={styles.navLabel}>Catalog</span>
-                </div>
-                <div className={styles.navItem} onClick={() => setActiveTab('Fullstack')}>
-                    <PathsIcon size={20} />
-                    <span className={styles.navLabel}>Paths</span>
-                </div>
-                <div className={styles.navItem}>
-                    <CollectionsIcon size={20} />
-                    <span className={styles.navLabel}>Collections</span>
-                </div>
-                <div className={styles.navItem}>
-                    <SubscriptionsIcon size={20} />
-                    <span className={styles.navLabel}>Subscriptions</span>
-                </div>
-                <div className={styles.navItem}>
-                    <OrganizationsIcon size={20} />
-                    <span className={styles.navLabel}>Organizations</span>
-                </div>
-            </aside>
-
-            {/* 2. Main Content Wrapper */}
-            <div className={styles.mainContent}>
+        <div className={`${styles.homeWrapper} ${theme === 'dark' ? 'dark-theme' : ''}`}>
                 {/* Header Top Bar */}
                 <header className={styles.header}>
                     <div className={styles.headerLeft}>
-                        <button 
-                            className={styles.menuToggle} 
-                            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                        >
-                            <MenuIcon size={20} />
-                        </button>
                         <div className={styles.logo} onClick={() => onChangeView('HOME')}>
-                            <span className={styles.logoLetterG}>B</span>
-                            <span className={styles.logoLetterO1}>u</span>
-                            <span className={styles.logoLetterO2}>g</span>
-                            <span className={styles.logoLetterG2}>f</span>
-                            <span className={styles.logoLetterL}>i</span>
-                            <span className={styles.logoLetterE}>x</span>
+                            <span className={styles.logoBrand}>Bugfix</span>
                             <span className={styles.logoSkills}>Academy</span>
                         </div>
                     </div>
@@ -391,16 +328,16 @@ export const Home: React.FC<HomeProps> = ({
                             <div className={styles.laptopContainer}>
                                 <div className={styles.laptopGraphic}>
                                     <div style={{ borderBottom: '2px solid var(--border-color)', paddingBottom: '12px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'var(--google-red)' }}></div>
-                                        <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'var(--google-yellow)' }}></div>
-                                        <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'var(--google-green)' }}></div>
+                                        <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'var(--tech-red)' }}></div>
+                                        <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'var(--tech-yellow)' }}></div>
+                                        <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: 'var(--tech-green)' }}></div>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginLeft: '8px' }}>credential_verify.sh</div>
                                     </div>
                                     <div style={{ textAlign: 'center', padding: '24px 0' }}>
-                                        <AwardIcon size={64} style={{ color: 'var(--google-blue)', marginBottom: '16px' }} />
+                                        <AwardIcon size={64} style={{ color: 'var(--tech-blue)', marginBottom: '16px' }} />
                                         <h4 style={{ fontFamily: 'var(--font-family-display)', marginBottom: '8px' }}>Course Completion Seal</h4>
                                         <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Fullstack Path: 100% Completed</p>
-                                        <div style={{ marginTop: '20px', padding: '8px', border: '1px dashed var(--google-green)', borderRadius: '4px', backgroundColor: 'rgba(52, 168, 83, 0.05)', fontSize: '0.78rem', color: 'var(--google-green)', fontWeight: '600' }}>
+                                        <div style={{ marginTop: '20px', padding: '8px', border: '1px dashed var(--tech-green)', borderRadius: '4px', backgroundColor: 'rgba(52, 168, 83, 0.05)', fontSize: '0.78rem', color: 'var(--tech-green)', fontWeight: '600' }}>
                                             ✓ SHA256 Verification Passed
                                         </div>
                                     </div>
@@ -451,14 +388,15 @@ export const Home: React.FC<HomeProps> = ({
                     {/* SECTION 6: START BUILDING BOTTOM BANNER */}
                     <section className={styles.bottomBannerSection}>
                         <div className={styles.bottomLogoG}>
-                            <svg width="48" height="48" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gGrad)" strokeWidth="10" />
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="url(#techGrad)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                                <line x1="14" y1="4" x2="10" y2="20"></line>
                                 <defs>
-                                    <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="var(--google-blue)" />
-                                        <stop offset="25%" stopColor="var(--google-red)" />
-                                        <stop offset="50%" stopColor="var(--google-yellow)" />
-                                        <stop offset="75%" stopColor="var(--google-green)" />
+                                    <linearGradient id="techGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#10b981" />
+                                        <stop offset="50%" stopColor="#06b6d4" />
+                                        <stop offset="100%" stopColor="#6366f1" />
                                     </linearGradient>
                                 </defs>
                             </svg>
@@ -472,7 +410,6 @@ export const Home: React.FC<HomeProps> = ({
                         </Button>
                     </section>
                 </div>
-            </div>
         </div>
     );
 };

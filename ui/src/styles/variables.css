@@ -6,12 +6,12 @@
   --font-family-display: 'Plus Jakarta Sans', var(--font-family-sans);
   --font-family-mono: 'Fira Code', monospace;
 
-  /* Google Brand Colors */
-  --google-blue: #1a73e8;
-  --google-blue-hover: #1557b0;
-  --google-red: #ea4335;
-  --google-yellow: #fbbc05;
-  --google-green: #34a853;
+  /* Brand Tech Colors */
+  --tech-blue: #0ea5e9; /* Vibrant Cyan-Sky */
+  --tech-blue-hover: #0284c7;
+  --tech-red: #f43f5e;  /* Sleek Coral-Rose */
+  --tech-yellow: #a855f7; /* Violet/Purple accent */
+  --tech-green: #10b981;  /* Emerald */
 
   /* Light Theme (Default - matches Google Skills screenshots) */
   --bg-primary: #ffffff;
@@ -27,8 +27,8 @@
   --border-color: #dadce0;
   --border-color-light: #f1f3f4;
   
-  --accent-blue-light: #e8f0fe;
-  --accent-blue-text: #1a73e8;
+  --accent-blue-light: rgba(14, 165, 233, 0.08);
+  --accent-blue-text: var(--tech-blue);
   
   --shadow-sm: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
   --shadow-md: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
@@ -59,8 +59,8 @@
   --border-color: #334155;
   --border-color-light: #1e293b;
   
-  --accent-blue-light: rgba(59, 130, 246, 0.15);
-  --accent-blue-text: #60a5fa;
+  --accent-blue-light: rgba(14, 165, 233, 0.15);
+  --accent-blue-text: #38bdf8;
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);

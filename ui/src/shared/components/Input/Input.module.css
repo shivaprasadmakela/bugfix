@@ -25,21 +25,21 @@
 }
 
 .input:focus {
-    border-color: var(--google-blue);
+    border-color: var(--tech-blue);
     box-shadow: 0 0 0 3px var(--accent-blue-light);
 }
 
 .inputError {
-    border-color: var(--google-red);
+    border-color: var(--tech-red);
 }
 
 .inputError:focus {
-    border-color: var(--google-red);
-    box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.15);
+    border-color: var(--tech-red);
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
 }
 
 .errorText {
     font-size: 0.75rem;
-    color: var(--google-red);
+    color: var(--tech-red);
     margin-top: 0.125rem;
 }

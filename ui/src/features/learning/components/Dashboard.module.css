@@ -24,7 +24,7 @@
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--google-blue);
+    color: var(--tech-blue);
 }
 
 .backBtn:hover {
@@ -118,7 +118,7 @@
 .profileRole {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--google-blue);
+    color: var(--tech-blue);
     background-color: var(--accent-blue-light);
     padding: 4px 10px;
     border-radius: var(--radius-pill);
@@ -172,7 +172,7 @@
 }
 
 .textarea:focus {
-    border-color: var(--google-blue);
+    border-color: var(--tech-blue);
     box-shadow: 0 0 0 3px var(--accent-blue-light);
 }
 
@@ -219,7 +219,7 @@
     font-family: var(--font-family-display);
     font-size: 2.25rem;
     font-weight: 700;
-    color: var(--google-blue);
+    color: var(--tech-blue);
     line-height: 1;
 }
 
@@ -298,14 +298,14 @@
 
 .progressLineInner {
     height: 100%;
-    background-color: var(--google-green);
+    background-color: var(--tech-green);
     border-radius: var(--radius-pill);
 }
 
 /* Certificates showcase */
 .certificateShowcaseCard {
     background-color: var(--bg-secondary);
-    border: 1px dashed var(--google-yellow);
+    border: 1px dashed var(--tech-yellow);
     border-radius: var(--radius-lg);
     padding: 24px;
     display: flex;
@@ -371,6 +371,6 @@
     font-family: var(--font-family-display);
     font-size: 1.05rem;
     font-weight: 600;
-    color: var(--google-red);
+    color: var(--tech-red);
     margin-bottom: 8px;
 }

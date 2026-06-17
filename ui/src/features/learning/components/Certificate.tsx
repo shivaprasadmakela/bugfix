@@ -30,7 +30,7 @@ export const Certificate: React.FC<CertificateProps> = ({
     
     // Confetti particles generator
     useEffect(() => {
-        const colors = ['#1a73e8', '#ea4335', '#fbbc05', '#34a853', '#a78bfa', '#f472b6'];
+        const colors = ['#06b6d4', '#10b981', '#6366f1', '#8b5cf6', '#d946ef', '#f43f5e'];
         const particles: ConfettiParticle[] = [];
         
         for (let i = 0; i < 120; i++) {
@@ -140,24 +140,16 @@ export const Certificate: React.FC<CertificateProps> = ({
 
             {/* Certificate Print Area Layout */}
             <div className={styles.certificateOuterFrame} id="certificate-print-area">
-                {/* Google styled colorful stripe borders */}
+                {/* Cyber tech gradient top border stripe */}
                 <div className={styles.borderStripeTop}>
-                    <div style={{ flex: 1, height: '8px', backgroundColor: 'var(--google-blue)' }}></div>
-                    <div style={{ flex: 1, height: '8px', backgroundColor: 'var(--google-red)' }}></div>
-                    <div style={{ flex: 1, height: '8px', backgroundColor: 'var(--google-yellow)' }}></div>
-                    <div style={{ flex: 1, height: '8px', backgroundColor: 'var(--google-green)' }}></div>
+                    <div style={{ width: '100%', height: '8px', background: 'linear-gradient(90deg, #10b981, #06b6d4, #6366f1, #8b5cf6)' }}></div>
                 </div>
 
                 <div className={styles.certificateInnerPaper}>
                     {/* Header */}
                     <div className={styles.certHeader}>
                         <div className={styles.academyLogo}>
-                            <span className={styles.logoLetterG}>B</span>
-                            <span className={styles.logoLetterO1}>u</span>
-                            <span className={styles.logoLetterO2}>g</span>
-                            <span className={styles.logoLetterG2}>f</span>
-                            <span className={styles.logoLetterL}>i</span>
-                            <span className={styles.logoLetterE}>x</span>
+                            <span className={styles.logoBrand}>Bugfix</span>
                             <span className={styles.logoAcademy}>Academy</span>
                         </div>
                         <span className={styles.docType}>Certificate of Completion</span>
@@ -180,14 +172,14 @@ export const Certificate: React.FC<CertificateProps> = ({
                     <div className={styles.certFooter}>
                         <div className={styles.footerRow}>
                             <div className={styles.signatureBlock}>
-                                <div className={styles.signatureLine}>Google Skills Team</div>
+                                <div className={styles.signatureLine}>Bugfix Academy Team</div>
                                 <span className={styles.signLabel}>Program Directorate</span>
                             </div>
                             <div className={styles.badgeSeal}>
                                 <svg width="72" height="72" viewBox="0 0 100 100" className={styles.sealSvg}>
-                                    <circle cx="50" cy="50" r="45" fill="none" stroke="var(--google-yellow)" strokeWidth="3" strokeDasharray="3 3" />
-                                    <circle cx="50" cy="50" r="38" fill="var(--google-yellow)" opacity="0.1" />
-                                    <path d="M50 20 L60 45 L85 45 L65 60 L75 85 L50 70 L25 85 L35 60 L15 45 L40 45 Z" fill="var(--google-yellow)" />
+                                    <circle cx="50" cy="50" r="45" fill="none" stroke="var(--tech-green)" strokeWidth="3" strokeDasharray="3 3" />
+                                    <circle cx="50" cy="50" r="38" fill="var(--tech-green)" opacity="0.1" />
+                                    <path d="M50 20 L60 45 L85 45 L65 60 L75 85 L50 70 L25 85 L35 60 L15 45 L40 45 Z" fill="var(--tech-green)" />
                                 </svg>
                             </div>
                             <div className={styles.signatureBlock}>
@@ -199,7 +191,7 @@ export const Certificate: React.FC<CertificateProps> = ({
                         {/* Cryptographic verification bottom metadata */}
                         <div className={styles.verificationBlock}>
                             <span className={styles.verificationText}>
-                                Certificate verification link: <strong>skills.google.com/verify/{verificationHash.slice(7, 24)}</strong>
+                                Certificate verification link: <strong>academy.bugfix.com/verify/{verificationHash.slice(7, 24)}</strong>
                             </span>
                             <span className={styles.verificationText}>
                                 Security Authentication Hash: <strong>{verificationHash}</strong>

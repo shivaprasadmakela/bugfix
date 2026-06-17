@@ -46,7 +46,7 @@
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--google-blue);
+    color: var(--tech-blue);
     font-family: var(--font-family-display);
 }
 
@@ -106,12 +106,15 @@
     color: #5f6368;
 }
 
-.logoLetterG { color: #1a73e8; }
-.logoLetterO1 { color: #ea4335; }
-.logoLetterO2 { color: #fbbc05; }
-.logoLetterG2 { color: #1a73e8; }
-.logoLetterL { color: #34a853; }
-.logoLetterE { color: #ea4335; }
+.logoBrand {
+    font-family: var(--font-family-mono);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, #10b981, #06b6d4, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 .docType {
     font-family: var(--font-family-display);
@@ -142,7 +145,7 @@
     font-family: var(--font-family-display);
     font-size: 2.75rem;
     font-weight: 700;
-    color: #1a73e8;
+    color: #0f172a;
     margin-bottom: 16px;
     letter-spacing: -0.01em;
 }

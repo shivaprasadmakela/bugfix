@@ -129,7 +129,7 @@
 
 .sidebarLessonItemActive {
     background-color: var(--accent-blue-light);
-    color: var(--google-blue);
+    color: var(--tech-blue);
 }
 
 .checkBubble {
@@ -145,8 +145,8 @@
 }
 
 .checkBubbleCompleted {
-    background-color: var(--google-green);
-    border-color: var(--google-green);
+    background-color: var(--tech-green);
+    border-color: var(--tech-green);
     color: #ffffff;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .courseNavBreadcrumb:hover {
-    color: var(--google-blue);
+    color: var(--tech-blue);
     text-decoration: underline;
 }
 
@@ -312,7 +312,7 @@
 }
 
 .mdBlockquote {
-    border-left: 4px solid var(--google-blue);
+    border-left: 4px solid var(--tech-blue);
     background-color: var(--bg-secondary);
     padding: 16px 20px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -363,7 +363,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     background-color: rgba(26, 115, 232, 0.1);
-    color: var(--google-blue);
+    color: var(--tech-blue);
     padding: 4px 8px;
     border-radius: var(--radius-sm);
     text-transform: uppercase;
@@ -510,36 +510,36 @@
 }
 
 .optionSelected {
-    border-color: var(--google-blue);
+    border-color: var(--tech-blue);
     background-color: var(--accent-blue-light);
 }
 
 .optionSelected .optionBubble {
-    background-color: var(--google-blue);
+    background-color: var(--tech-blue);
     color: #ffffff;
-    border-color: var(--google-blue);
+    border-color: var(--tech-blue);
 }
 
 .optionCorrect {
-    border-color: var(--google-green) !important;
+    border-color: var(--tech-green) !important;
     background-color: rgba(52, 168, 83, 0.05) !important;
 }
 
 .optionCorrect .optionBubble {
-    background-color: var(--google-green) !important;
+    background-color: var(--tech-green) !important;
     color: #ffffff !important;
-    border-color: var(--google-green) !important;
+    border-color: var(--tech-green) !important;
 }
 
 .optionIncorrect {
-    border-color: var(--google-red) !important;
+    border-color: var(--tech-red) !important;
     background-color: rgba(234, 67, 53, 0.05) !important;
 }
 
 .optionIncorrect .optionBubble {
-    background-color: var(--google-red) !important;
+    background-color: var(--tech-red) !important;
     color: #ffffff !important;
-    border-color: var(--google-red) !important;
+    border-color: var(--tech-red) !important;
 }
 
 .explanationBox {
@@ -552,13 +552,13 @@
 
 .explanationCorrect {
     background-color: rgba(52, 168, 83, 0.05);
-    color: var(--google-green);
+    color: var(--tech-green);
     border: 1px solid rgba(52, 168, 83, 0.2);
 }
 
 .explanationIncorrect {
     background-color: rgba(234, 67, 53, 0.05);
-    color: var(--google-red);
+    color: var(--tech-red);
     border: 1px solid rgba(234, 67, 53, 0.2);
 }
 
@@ -586,13 +586,13 @@
 
 .scoreBannerPassed {
     background-color: rgba(52, 168, 83, 0.08);
-    color: var(--google-green);
+    color: var(--tech-green);
     border: 1px solid rgba(52, 168, 83, 0.2);
 }
 
 .scoreBannerFailed {
     background-color: rgba(234, 67, 53, 0.08);
-    color: var(--google-red);
+    color: var(--tech-red);
     border: 1px solid rgba(234, 67, 53, 0.2);
 }
 
@@ -613,7 +613,7 @@
     cursor: pointer;
     font-size: 0.92rem;
     font-weight: 600;
-    color: var(--google-blue);
+    color: var(--tech-blue);
     padding: 8px 16px;
     border-radius: var(--radius-pill);
     font-family: var(--font-family-display);
