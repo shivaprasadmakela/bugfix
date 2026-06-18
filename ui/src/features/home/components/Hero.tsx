@@ -3,7 +3,20 @@ import { Button } from '../../../shared/components/Button/Button';
 import { ChevronRightIcon } from '../../../shared/components/Icons';
 import styles from './Home.module.css';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+    isLoggedIn: boolean;
+    setAuthModalOpen: (val: boolean) => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ isLoggedIn, setAuthModalOpen }) => {
+    const handleStart = () => {
+        if (isLoggedIn) {
+            document.getElementById('catalog-section')?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            setAuthModalOpen(true);
+        }
+    };
+
     const scrollToCatalog = () => {
         document.getElementById('catalog-section')?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -23,7 +36,7 @@ export const Hero: React.FC = () => {
                 <Button
                     variant="primary"
                     size="lg"
-                    onClick={scrollToCatalog}
+                    onClick={handleStart}
                 >
                     Start Learning
                 </Button>

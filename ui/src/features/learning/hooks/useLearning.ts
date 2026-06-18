@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { supabase } from '../../../shared/supabaseClient';
 import type { Course, Lesson, UserProgress, UserProfile } from '../types';
 import * as api from '../api/learningApi';
 
@@ -15,6 +16,11 @@ export const useLearning = () => {
     const [error, setError] = useState<string | null>(null);
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
+    // Supabase Auth state variables
+    const [session, setSession] = useState<any>(null);
+    const [user, setUser] = useState<any>(null);
+    const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+
     // Toggle theme
     const toggleTheme = useCallback(() => {
         const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -22,24 +28,30 @@ export const useLearning = () => {
         document.documentElement.setAttribute('data-theme', nextTheme);
     }, [theme]);
 
-    // Initial load
-    const loadInitialData = useCallback(async () => {
-        setIsLoading(true);
+    // Initial load of courses
+    const loadCoursesOnly = useCallback(async () => {
+        try {
+            const fetchedCourses = await api.fetchCourses();
+            setCourses(fetchedCourses);
+        } catch (err: any) {
+            console.error('Failed to fetch courses:', err);
+            setError(err.message || 'Connection error: Spring Boot backend could not be reached.');
+        }
+    }, []);
+
+    // Load progress and profile when authenticated
+    const loadUserData = useCallback(async () => {
         setError(null);
         try {
-            const [fetchedCourses, fetchedProgress, fetchedProfile] = await Promise.all([
-                api.fetchCourses(),
+            const [fetchedProgress, fetchedProfile] = await Promise.all([
                 api.fetchProgress(),
                 api.fetchProfile()
             ]);
-            setCourses(fetchedCourses);
             setProgress(fetchedProgress);
             setProfile(fetchedProfile);
         } catch (err: any) {
-            console.error('Failed to load initial learning data:', err);
-            setError(err.message || 'Connection error: Spring Boot backend could not be reached.');
-        } finally {
-            setIsLoading(false);
+            console.error('Failed to load user progress and profile:', err);
+            // Don't show critical connection error banner if it's just profile auth failing temporarily
         }
     }, []);
 
@@ -91,8 +103,17 @@ export const useLearning = () => {
         handlePathChange();
     }, [handlePathChange]);
 
+    // Handle routing changes and initial load
     useEffect(() => {
-        // Run once initially when initial data is loaded
+        loadCoursesOnly();
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    }, [loadCoursesOnly]);
+
+    useEffect(() => {
         if (courses.length > 0) {
             handlePathChange();
         }
@@ -103,14 +124,50 @@ export const useLearning = () => {
         };
     }, [courses, handlePathChange]);
 
+    // Supabase Auth listener
     useEffect(() => {
-        loadInitialData();
-        // Check system theme preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-    }, [loadInitialData]);
+        setIsLoading(true);
+        
+        // Get current session
+        supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+            setSession(currentSession);
+            setUser(currentSession?.user ?? null);
+            if (currentSession) {
+                loadUserData().then(() => setIsLoading(false));
+            } else {
+                setIsLoading(false);
+            }
+        });
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, currentSession) => {
+            const wasLoggedIn = !!user;
+
+            setSession(currentSession);
+            setUser(currentSession?.user ?? null);
+
+            if (currentSession) {
+                await loadUserData();
+                if (!wasLoggedIn && event === 'SIGNED_IN') {
+                    // Redirect to dashboard after login
+                    setActiveView('DASHBOARD');
+                    navigate('/dashboard');
+                }
+            } else {
+                setProgress([]);
+                setProfile(null);
+                if (wasLoggedIn) {
+                    setActiveView('HOME');
+                    navigate('/');
+                }
+            }
+            setIsLoading(false);
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [loadUserData, navigate]);
 
     const selectCourse = useCallback(async (courseId: number) => {
         navigate(`/course/${courseId}`);
@@ -133,6 +190,45 @@ export const useLearning = () => {
             else navigate('/');
         }
     }, [navigate, currentCourse, activeLesson]);
+
+    const signUp = async (email: string, pass: string, fullName: string) => {
+        const { data, error: err } = await supabase.auth.signUp({
+            email,
+            password: pass,
+            options: {
+                data: {
+                    full_name: fullName
+                }
+            }
+        });
+        if (err) throw err;
+        return data;
+    };
+
+    const signIn = async (email: string, pass: string) => {
+        const { data, error: err } = await supabase.auth.signInWithPassword({
+            email,
+            password: pass
+        });
+        if (err) throw err;
+        return data;
+    };
+
+    const signOut = async () => {
+        const { error: err } = await supabase.auth.signOut();
+        if (err) throw err;
+    };
+
+    const signInWithGoogle = async () => {
+        const { data, error: err } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.origin
+            }
+        });
+        if (err) throw err;
+        return data;
+    };
 
     const markLessonCompleted = async (lessonId: number) => {
         try {
@@ -174,9 +270,7 @@ export const useLearning = () => {
             await api.resetProgress();
             const freshProgress = await api.fetchProgress();
             setProgress(freshProgress);
-            navigate('/');
-            setCurrentCourse(null);
-            setActiveLesson(null);
+            navigate('/dashboard');
         } catch (err: any) {
             console.error('Failed to reset progress:', err);
         } finally {
@@ -221,7 +315,19 @@ export const useLearning = () => {
         submitQuiz,
         resetAllProgress,
         saveProfile,
-        refreshInitialData: loadInitialData
+        refreshInitialData: loadUserData,
+
+        // Auth properties
+        session,
+        user,
+        isLoggedIn: !!user,
+        authModalOpen,
+        setAuthModalOpen,
+        signUp,
+        signIn,
+        signOut,
+        signInWithGoogle
     };
 };
+
 export type UseLearningReturn = ReturnType<typeof useLearning>;

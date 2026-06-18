@@ -2,8 +2,6 @@ package com.bugfix.learning.config;
 
 import com.bugfix.learning.entity.*;
 import com.bugfix.learning.repository.*;
-import com.bugfix.profile.entity.UserProfile;
-import com.bugfix.profile.repository.UserProfileRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -14,18 +12,15 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final CourseModuleRepository courseModuleRepository;
     private final LessonRepository lessonRepository;
     private final QuizQuestionRepository quizQuestionRepository;
-    private final UserProfileRepository userProfileRepository;
 
     public DatabaseSeeder(CourseRepository courseRepository,
                           CourseModuleRepository courseModuleRepository,
                           LessonRepository lessonRepository,
-                          QuizQuestionRepository quizQuestionRepository,
-                          UserProfileRepository userProfileRepository) {
+                          QuizQuestionRepository quizQuestionRepository) {
         this.courseRepository = courseRepository;
         this.courseModuleRepository = courseModuleRepository;
         this.lessonRepository = lessonRepository;
         this.quizQuestionRepository = quizQuestionRepository;
-        this.userProfileRepository = userProfileRepository;
     }
 
     @Override
@@ -34,23 +29,6 @@ public class DatabaseSeeder implements CommandLineRunner {
         if (courseRepository.count() == 0) {
             seedCourses();
         }
-
-        // Seed default profile if empty
-        if (userProfileRepository.count() == 0) {
-            seedProfile();
-        }
-    }
-
-    private void seedProfile() {
-        UserProfile defaultProfile = new UserProfile(
-                null,
-                "learner_1",
-                "Alex Learner",
-                "👨‍💻",
-                "Apprentice Fullstack Developer",
-                "Learning React and Spring Boot to build beautiful, responsive web applications."
-        );
-        userProfileRepository.save(defaultProfile);
     }
 
     private void seedCourses() {

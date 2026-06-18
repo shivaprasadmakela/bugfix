@@ -5,9 +5,23 @@ import styles from './Home.module.css';
 
 interface FinalCTAProps {
     onSelectCourse: (courseId: number) => void;
+    isLoggedIn: boolean;
+    setAuthModalOpen: (val: boolean) => void;
 }
 
-export const FinalCTA: React.FC<FinalCTAProps> = ({ onSelectCourse }) => {
+export const FinalCTA: React.FC<FinalCTAProps> = ({ 
+    onSelectCourse, 
+    isLoggedIn, 
+    setAuthModalOpen 
+}) => {
+    const handleStart = () => {
+        if (isLoggedIn) {
+            onSelectCourse(1);
+        } else {
+            setAuthModalOpen(true);
+        }
+    };
+
     return (
         <section className={styles.bottomBannerSection}>
             <div className={styles.bottomBannerGlow} />
@@ -31,7 +45,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onSelectCourse }) => {
                 and continuously improve your software engineering skills.
             </p>
             <div className={styles.heroButtons}>
-                <Button variant="primary" size="lg" onClick={() => onSelectCourse(1)}>
+                <Button variant="primary" size="lg" onClick={handleStart}>
                     Start Learning
                 </Button>
                 <button

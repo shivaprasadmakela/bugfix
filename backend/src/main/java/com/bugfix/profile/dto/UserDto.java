@@ -1,8 +1,8 @@
 package com.bugfix.profile.dto;
 
-public record UserProfileDto(
-    Long id,
-    String username,
+public record UserDto(
+    String id,
+    String email,
     String fullName,
     String avatar,
     String role,

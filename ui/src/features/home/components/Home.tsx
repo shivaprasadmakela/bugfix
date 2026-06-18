@@ -12,6 +12,8 @@ interface HomeProps {
     onSelectCourse: (id: number) => void;
     onResetProgress: () => void;
     searchQuery: string;
+    isLoggedIn: boolean;
+    setAuthModalOpen: (val: boolean) => void;
 }
 
 export const Home: React.FC<HomeProps> = ({
@@ -20,6 +22,8 @@ export const Home: React.FC<HomeProps> = ({
     onSelectCourse,
     onResetProgress: _onResetProgress,
     searchQuery,
+    isLoggedIn,
+    setAuthModalOpen
 }) => {
     const [activeTab, setActiveTab] = useState<string>('Featured');
 
@@ -51,7 +55,7 @@ export const Home: React.FC<HomeProps> = ({
             </div>
 
             <div className={styles.scrollContainer}>
-                <Hero />
+                <Hero isLoggedIn={isLoggedIn} setAuthModalOpen={setAuthModalOpen} />
                 <CatalogBlock
                     filteredCourses={filteredCourses}
                     activeTab={activeTab}
@@ -60,7 +64,7 @@ export const Home: React.FC<HomeProps> = ({
                     onSelectCourse={onSelectCourse}
                 />
                 <Community onSelectCourse={onSelectCourse} />
-                <FinalCTA onSelectCourse={onSelectCourse} />
+                <FinalCTA onSelectCourse={onSelectCourse} isLoggedIn={isLoggedIn} setAuthModalOpen={setAuthModalOpen} />
             </div>
         </div>
     );

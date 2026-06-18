@@ -26,6 +26,9 @@ interface HeaderProps {
     toggleTheme: () => void;
     searchQuery: string;
     setSearchQuery: (val: string) => void;
+    isLoggedIn: boolean;
+    setAuthModalOpen: (val: boolean) => void;
+    signOut: () => Promise<void>;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -37,7 +40,10 @@ export const Header: React.FC<HeaderProps> = ({
     theme,
     toggleTheme,
     searchQuery,
-    setSearchQuery
+    setSearchQuery,
+    isLoggedIn,
+    setAuthModalOpen,
+    signOut
 }) => {
     const userFirstName = profile?.fullName?.split(' ')[0] ?? 'there';
 
@@ -47,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <button className={styles.menuBtn} onClick={() => setIsExpanded(!isExpanded)} aria-label="Toggle menu">
                     <MenuIcon size={22} />
                 </button>
-                <div className={styles.logo} onClick={() => changeView('HOME')}>
+                <div className={styles.logo} onClick={() => changeView(isLoggedIn ? 'DASHBOARD' : 'HOME')}>
                     <span className={styles.logoBrand}>Bugfix</span>
                     <span className={styles.logoAcademy}>Academy</span>
                 </div>
@@ -76,9 +82,22 @@ export const Header: React.FC<HeaderProps> = ({
                 </button>
                 <button className={styles.headerIconBtn}><GlobeIcon size={20} /></button>
                 <button className={styles.headerIconBtn}><HelpIcon size={20} /></button>
-                <button className={styles.signInBtn} onClick={() => changeView('DASHBOARD')}>
-                    {profile ? `Hi, ${userFirstName}` : 'Sign in'}
-                </button>
+                
+                {isLoggedIn ? (
+                    <div className={styles.loggedInContainer}>
+                        <button className={styles.signInBtn} onClick={() => changeView('DASHBOARD')}>
+                            <span style={{ marginRight: '6px' }}>{profile?.avatar || '👨‍💻'}</span>
+                            <span>Hi, {userFirstName}</span>
+                        </button>
+                        <button className={styles.logoutBtn} onClick={signOut}>
+                            Logout
+                        </button>
+                    </div>
+                ) : (
+                    <button className={styles.signInBtn} onClick={() => setAuthModalOpen(true)}>
+                        Join Academy
+                    </button>
+                )}
             </div>
         </header>
     );

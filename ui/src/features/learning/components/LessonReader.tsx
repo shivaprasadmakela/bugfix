@@ -167,7 +167,7 @@ export const LessonReader: React.FC<LessonReaderProps> = ({
                 // Mock evaluations based on code contents
                 if (lesson.id === 1) {
                     logs += '> node fetch_test.js\n';
-                    logs += 'Connection established with port 8081\n';
+                    logs += 'Connection established with port 8080\n';
                     logs += 'GET /api/courses HTTP/1.1 -> 200 OK\n';
                     logs += 'Console log: Fetched courses: 4\n';
                     passed = sandboxCode.includes('fetch');

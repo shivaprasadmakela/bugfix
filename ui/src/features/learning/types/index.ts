@@ -46,7 +46,7 @@ export interface UserProgress {
 }
 
 export interface UserProfile {
-    id: number;
+    id: string;
     username: string;
     fullName: string;
     avatar: string;

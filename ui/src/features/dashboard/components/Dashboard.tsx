@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Course, UserProgress, UserProfile } from '../../../features/learning/types';
 import { Button } from '../../../shared/components/Button/Button';
 import { Input } from '../../../shared/components/Input/Input';
@@ -31,6 +31,16 @@ export const Dashboard: React.FC<DashboardProps> = ({
     const [avatar, setAvatar] = useState<string>(profile?.avatar || '👨‍💻');
     const [role, setRole] = useState<string>(profile?.role || 'Junior Fullstack Engineer');
     const [bio, setBio] = useState<string>(profile?.bio || 'Learning React & Spring Boot.');
+
+    // Sync state with profile loaded from API
+    useEffect(() => {
+        if (profile) {
+            setFullName(profile.fullName);
+            setAvatar(profile.avatar);
+            setRole(profile.role);
+            setBio(profile.bio);
+        }
+    }, [profile]);
 
     const completedCount = progress.filter(p => p.completed).length;
     const progressVal = Math.min(Math.round((completedCount / 8) * 100), 100); // course 1 has 8 lessons

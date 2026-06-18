@@ -1,4 +1,5 @@
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/BackendApplication.java
+/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/common/config/SecurityConfig.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/common/config/WebConfig.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/learning/config/DatabaseSeeder.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/learning/controller/CourseController.java
@@ -15,11 +16,11 @@
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/learning/repository/LessonRepository.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/learning/repository/QuizQuestionRepository.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/learning/service/CourseService.java
-/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/controller/UserProfileController.java
-/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/dto/UserProfileDto.java
-/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/entity/UserProfile.java
-/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/repository/UserProfileRepository.java
-/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/service/UserProfileService.java
+/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/controller/UserController.java
+/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/dto/UserDto.java
+/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/entity/User.java
+/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/repository/UserRepository.java
+/Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/profile/service/UserService.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/progress/controller/ProgressController.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/progress/dto/UserProgressDto.java
 /Users/shivaprasad/Documents/Projects/bugfix/backend/src/main/java/com/bugfix/progress/entity/UserProgress.java

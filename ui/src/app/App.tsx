@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLearning, CourseDetail, LessonReader } from '../features/learning';
 import { Home } from '../features/home';
 import { Dashboard } from '../features/dashboard';
 import { Certificate } from '../features/certificate';
-import { Header, Sidebar } from '../shared/components';
+import { Header, Sidebar, AuthModal } from '../shared/components';
 import styles from './App.module.css';
-
-
 
 export default function App() {
     const {
@@ -26,12 +24,32 @@ export default function App() {
         markLessonCompleted,
         submitQuiz,
         resetAllProgress,
-        saveProfile
+        saveProfile,
+
+        // Auth properties
+        isLoggedIn,
+        authModalOpen,
+        setAuthModalOpen,
+        signUp,
+        signIn,
+        signOut,
+        signInWithGoogle
     } = useLearning();
 
     const [isExpanded, setIsExpanded] = useState(false);
     const [isCollectionsExpanded, setIsCollectionsExpanded] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Force redirection based on auth state
+    useEffect(() => {
+        if (!isLoading) {
+            if (isLoggedIn && activeView === 'HOME') {
+                changeView('DASHBOARD');
+            } else if (!isLoggedIn && (activeView === 'DASHBOARD' || activeView === 'CERTIFICATE')) {
+                changeView('HOME');
+            }
+        }
+    }, [isLoggedIn, activeView, isLoading, changeView]);
 
     if (isLoading && courses.length === 0) {
         return (
@@ -42,12 +60,11 @@ export default function App() {
         );
     }
 
-
     return (
         <div className={`${styles.appRoot} ${theme === 'dark' ? 'dark-theme' : ''}`}>
             {error && (
                 <div className={styles.errorBanner}>
-                    <p>⚠️ {error}. Please ensure the Spring Boot server is running on port 8081.</p>
+                    <p>⚠️ {error}. Please ensure the Spring Boot server is running on port 8080.</p>
                 </div>
             )}
 
@@ -62,6 +79,9 @@ export default function App() {
                 toggleTheme={toggleTheme}
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
+                isLoggedIn={isLoggedIn}
+                setAuthModalOpen={setAuthModalOpen}
+                signOut={signOut}
             />
 
             <div className={styles.appLayout}>
@@ -74,6 +94,7 @@ export default function App() {
                     activeView={activeView}
                     changeView={changeView}
                     selectCourse={selectCourse}
+                    isLoggedIn={isLoggedIn}
                 />
 
                 {/* Main Content Area */}
@@ -82,9 +103,14 @@ export default function App() {
                         <Home 
                             courses={courses}
                             progress={progress}
-                            onSelectCourse={selectCourse}
+                            onSelectCourse={(id) => {
+                                if (isLoggedIn) selectCourse(id);
+                                else setAuthModalOpen(true);
+                            }}
                             onResetProgress={resetAllProgress}
                             searchQuery={searchQuery}
+                            isLoggedIn={isLoggedIn}
+                            setAuthModalOpen={setAuthModalOpen}
                         />
                     )}
 
@@ -93,7 +119,10 @@ export default function App() {
                             course={currentCourse}
                             progress={progress}
                             onBack={() => changeView('HOME')}
-                            onStartLesson={selectLesson}
+                            onStartLesson={(id) => {
+                                if (isLoggedIn) selectLesson(id);
+                                else setAuthModalOpen(true);
+                            }}
                         />
                     )}
 
@@ -132,6 +161,15 @@ export default function App() {
                     )}
                 </main>
             </div>
+
+            {/* Authentication Glassmorphic Modal */}
+            <AuthModal
+                isOpen={authModalOpen}
+                onClose={() => setAuthModalOpen(false)}
+                signUp={signUp}
+                signIn={signIn}
+                signInWithGoogle={signInWithGoogle}
+            />
         </div>
     );
 }
